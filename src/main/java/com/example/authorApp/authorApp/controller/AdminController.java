@@ -42,7 +42,7 @@ public class AdminController
     @PostMapping(path = "/books")
     public ResponseEntity addBook(@RequestBody Book book)
     {
-        adminService.createBook(book.getId(),book.getName(),book.getAuthorName(),book.getPublicationYear(),book);
+        adminService.createBook(book);
         return new ResponseEntity<>("Book addition Success !!! ", HttpStatus.CREATED);
     }
 

@@ -26,12 +26,8 @@ public class AdminServiceImpl implements AdminService
     }
 
     @Override
-    public void createBook(String id , String name, String authorName , String publicationYear, Book book)
+    public void createBook(Book book)
     {
-        book.setId(id);
-        book.setName(name);
-        book.setAuthorName(authorName);
-        book.setPublicationYear(publicationYear);
         bookRepository.save(book);
     }
     @Override
