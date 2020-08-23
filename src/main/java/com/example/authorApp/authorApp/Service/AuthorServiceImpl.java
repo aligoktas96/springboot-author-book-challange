@@ -25,7 +25,6 @@ public class AuthorServiceImpl implements AuthorService
     @Override
     public void createAuthor(Author author)
     {
-        author.setName(whoAmI().getUsername());
         authorRepository.save(author);
     }
 
