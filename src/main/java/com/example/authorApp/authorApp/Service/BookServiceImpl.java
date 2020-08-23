@@ -1,10 +1,9 @@
 package com.example.authorApp.authorApp.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -28,32 +27,45 @@ public class BookServiceImpl implements BookService
     }
 
     @Override
-    public void createBook(String id , String name,String authorName ,String publicationYear,Book book)
+    public void createBook(Book book)
     {
-        book.setId(id);
-        book.setName(name);
-        book.setAuthorName(authorName);
-        book.setPublicationYear(publicationYear);
+        book.setId(book.getId());
+        book.setName(book.getName());
+        book.setAuthorName(whoAmI().getUsername());
+        book.setPublicationYear(book.getPublicationYear());
         bookRepository.save(book);
     }
+
     @Override
     public List<Book> getBooks()
     {
-        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return bookRepository.findByAuthorName(principal.getUsername());
+        return bookRepository.findByAuthorName(whoAmI().getUsername());
     }
 
     @Override
-    public void updateBook(String id,Book book)
+    public void updateBook(Book book)
     {
-        bookRepository.deleteById(id);
-        bookRepository.save(book);
+        Optional<Book> optionalBook = this.bookRepository.findByIdAndAuthorName(book.getId(),
+                whoAmI().getUsername());
 
+        if(optionalBook.isPresent()){
+            book.setAuthorName(whoAmI().getUsername());
+            System.out.println(book);
+            this.bookRepository.save(book);
+        }else {
+            // Olumsuz
+            System.err.println("ERROR");
+        }
     }
 
     @Override
     public void deleteBook(String id)
     {
         bookRepository.deleteById(id);
+    }
+
+    private User whoAmI()
+    {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

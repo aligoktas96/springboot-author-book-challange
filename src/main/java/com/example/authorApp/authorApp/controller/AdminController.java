@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.authorApp.authorApp.Service.AdminService;
+import com.example.authorApp.authorApp.Service.AuthorService;
 import com.example.authorApp.authorApp.Service.BookService;
+import com.example.authorApp.authorApp.entity.Author;
 import com.example.authorApp.authorApp.entity.Book;
 
 @RestController
@@ -23,6 +25,7 @@ public class AdminController
     @Autowired
     private AdminService adminService;
     private BookService bookService;
+    private AuthorService authorService;
 
     @GetMapping(path = "/books")
     public ResponseEntity listAll()
@@ -37,10 +40,17 @@ public class AdminController
         return new ResponseEntity<>("Book addition Success !!! ", HttpStatus.CREATED);
     }
 
+    @PostMapping("/addAuthor")
+    public ResponseEntity addAuthor(@RequestBody Author author)
+    {
+        authorService.createAuthor(author);
+        return new ResponseEntity<>(adminService.getAuthors(), HttpStatus.CREATED);
+    }
+
     @PutMapping(path = "/books")
     public ResponseEntity updateBook(@RequestBody Book book){
         adminService.updateBook(book.getId(),book);
-        return new ResponseEntity<>("Book update Success !!!",HttpStatus.OK);
+        return new ResponseEntity<>(adminService.getAuthors(),HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/books")
@@ -48,4 +58,5 @@ public class AdminController
         adminService.deleteBook(book.getId());
         return  new ResponseEntity<>("Book deleted !!!", HttpStatus.OK);
     }
+
 }

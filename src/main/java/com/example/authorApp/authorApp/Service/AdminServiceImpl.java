@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.authorApp.authorApp.entity.Author;
 import com.example.authorApp.authorApp.entity.Book;
 import com.example.authorApp.authorApp.repository.AuthorRepository;
 import com.example.authorApp.authorApp.repository.BookRepository;
@@ -14,12 +15,14 @@ public class AdminServiceImpl implements AdminService
 {
 
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+
 
     @Autowired
     public AdminServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository)
     {
         this.bookRepository = bookRepository;
-
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -39,6 +42,12 @@ public class AdminServiceImpl implements AdminService
     }
 
     @Override
+    public List<Author> getAuthors()
+    {
+        return authorRepository.findAll();
+    }
+
+    @Override
     public void updateBook(String id,Book book)
     {
         bookRepository.deleteById(id);
@@ -51,4 +60,5 @@ public class AdminServiceImpl implements AdminService
     {
         bookRepository.deleteById(id);
     }
+
 }

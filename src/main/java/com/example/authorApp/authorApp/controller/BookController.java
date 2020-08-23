@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,20 +31,22 @@ public class BookController
     @PostMapping
     public ResponseEntity addBook(@RequestBody Book book)
     {
-        bookService.createBook(book.getId(),book.getName(),book.getAuthorName(),book.getPublicationYear(),book);
+        bookService.createBook(book);
         return new ResponseEntity<>("Book addition Success !!! ", HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity updateBook(@RequestBody Book book){
-        bookService.updateBook(book.getId(),book);
-        return new ResponseEntity<>("Book update Success !!!",HttpStatus.OK);
+    public ResponseEntity updateBook(@RequestBody Book book)
+    {
+        bookService.updateBook(book);
+        return new ResponseEntity<>("Book update Success !!!", HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity deleteBook(@RequestBody Book book){
+    public ResponseEntity deleteBook(@RequestBody Book book)
+    {
         bookService.deleteBook(book.getId());
-        return  new ResponseEntity<>("Book deleted !!!", HttpStatus.OK);
+        return new ResponseEntity<>("Book deleted !!!", HttpStatus.OK);
     }
 
 }
