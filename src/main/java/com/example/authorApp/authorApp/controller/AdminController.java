@@ -28,9 +28,15 @@ public class AdminController
     private AuthorService authorService;
 
     @GetMapping(path = "/books")
-    public ResponseEntity listAll()
+    public ResponseEntity listAllBooks()
     {
         return new ResponseEntity<>(adminService.getBooks(), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/authors")
+    public ResponseEntity listAllAuthors()
+    {
+        return new ResponseEntity<>(adminService.getAuthors(), HttpStatus.OK);
     }
 
     @PostMapping(path = "/books")
