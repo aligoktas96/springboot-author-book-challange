@@ -29,10 +29,6 @@ public class BookServiceImpl implements BookService
     @Override
     public void createBook(Book book)
     {
-        book.setId(book.getId());
-        book.setName(book.getName());
-        book.setAuthorName(whoAmI().getUsername());
-        book.setPublicationYear(book.getPublicationYear());
         bookRepository.save(book);
     }
 
