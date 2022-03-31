@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.authorApp.authorApp.Service.BookService;
+import com.example.authorApp.authorApp.service.BookService;
 import com.example.authorApp.authorApp.entity.Book;
 
 @RestController

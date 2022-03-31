@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.authorApp.authorApp.Service.AdminService;
-import com.example.authorApp.authorApp.Service.AuthorService;
-import com.example.authorApp.authorApp.Service.BookService;
+import com.example.authorApp.authorApp.service.AdminService;
+import com.example.authorApp.authorApp.service.AuthorService;
+import com.example.authorApp.authorApp.service.BookService;
 import com.example.authorApp.authorApp.entity.Author;
 import com.example.authorApp.authorApp.entity.Book;
 

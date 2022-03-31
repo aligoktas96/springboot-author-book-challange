@@ -1,7 +1,8 @@
-package com.example.authorApp.authorApp.Service;
+package com.example.authorApp.authorApp.service.impl;
 
 import java.util.List;
 
+import com.example.authorApp.authorApp.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
